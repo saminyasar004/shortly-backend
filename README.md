@@ -11,13 +11,13 @@ The API accect only GET method.
 -   Base route
 
 ```http
-http://localhost:3000/api
+http://localhost:3000
 ```
 
 -   Shorten a link
 
 ```http
-http://localhost:3000/api/shorten
+http://localhost:3000/shorten
 ```
 
 Create a short link for a given URL. Requires a `url` parameter
@@ -25,7 +25,7 @@ Create a short link for a given URL. Requires a `url` parameter
 ### Example
 
 ```http
-http://localhost:3000/api/shorten?url=example.org
+http://localhost:3000/shorten?url=example.org
 ```
 
 ### Response
@@ -33,10 +33,9 @@ http://localhost:3000/api/shorten?url=example.org
 ```javascript
 {
   "result": {
-      "code": "KCveN",
-      "short_link": "localhost:3000/KCveN",
-      "full_short_link": "http://localhost:3000/KCveN",
-      "original_link": "http://example.org"
+      "shortenId": "KCveN",
+      "shortenLink": "http://localhost:3000/KCveN",
+      "originalLink": "http://example.org"
   }
 }
 ```
