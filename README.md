@@ -33,8 +33,8 @@ https://shortly-samin.herokuapp.com/shorten?url=example.org
 ```javascript
 {
   "result": {
-      "shortenId": "KCveN",
-      "shortenLink": "https://shortly-samin.herokuapp.com/KCveN",
+      "shortenId": "kcven",
+      "shortenLink": "https://shortly-samin.herokuapp.com/kcven",
       "originalLink": "http://example.org"
   }
 }
