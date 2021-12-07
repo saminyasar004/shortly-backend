@@ -44,9 +44,10 @@ shortenHandler.shorten.get = (requestProps, callback) => {
                     // return the existing data
                     const existingData = { ...getExistingData[0] };
                     existingData.shortenLink = `${process.env.PROJECT_URL}/redirect/${existingData.shortenId}`;
+                    delete existingData.id;
 
                     callback(200, {
-                        existingData: { ...existingData },
+                        result: { ...existingData },
                     });
                 } else {
                     // create one
@@ -65,9 +66,10 @@ shortenHandler.shorten.get = (requestProps, callback) => {
                                     if (!getCreatedError && getCreatedData.length) {
                                         const createdData = { ...getCreatedData[0] };
                                         createdData.shortenLink = `${process.env.PROJECT_URL}/redirect/${createdData.shortenId}`;
+                                        delete createdData.id;
 
                                         callback(200, {
-                                            createdData: { ...createdData },
+                                            result: { ...createdData },
                                         });
                                     } else {
                                         callback(500, {

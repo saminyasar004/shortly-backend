@@ -22,6 +22,23 @@ database.connection = mysql.createConnection({
 });
 
 /**
+ * Create table in the database
+ *
+ * @param {Connection} con - The database connection
+ * @param {CallableFunction} callback - A callback function
+ */
+database.createTable = (con, callback) => {
+    const sqlQuery = `CREATE TABLE IF NOT EXISTS ${process.env.DB_TABLE} (id INT(11) AUTO_INCREMENT PRIMARY KEY, shortenId VARCHAR(255) NOT NULL, originalLink VARCHAR(255) NOT NULL)`;
+    con.query(sqlQuery, (err) => {
+        if (!err) {
+            callback(null);
+        } else {
+            callback(err);
+        }
+    });
+};
+
+/**
  * Lookup in database by original link
  *
  * @param {Connection} con - The database connection
@@ -83,6 +100,17 @@ database.insertLink = (con, values, callback) => {
 database.connection.connect((err) => {
     if (!err) {
         console.log(`Successfully connected with ${process.env.DB} database.`);
+        // create a table in the database if not exist
+        database.createTable(database.connection, (createError) => {
+            if (!createError) {
+                console.log(`Successfully created ${process.env.DB_TABLE} in the database.`);
+            } else {
+                console.log(
+                    `Error occures while creating ${process.env.DB_TABLE} in the database.`
+                );
+                throw new Error(createError);
+            }
+        });
     } else {
         console.log(`Error occures while connecting to ${process.env.DB} database.`);
         throw new Error(err);

@@ -15,15 +15,15 @@ const { handler: reqResHandler } = require("../handlers/reqResHandler");
 const server = {};
 
 // Set a Server port
-server.PORT = 5000;
+server.PORT = process.env.PORT || 5000;
 
 // Define the initializer function
 server.init = () => {
     // create a server
     const httpServer = http.createServer(reqResHandler);
     // listen the server
-    httpServer.listen(process.env.PORT || server.PORT, () => {
-        console.log(`Server is running on ${process.env.PORT || server.PORT}`);
+    httpServer.listen(server.PORT, () => {
+        console.log(`Server is running on ${server.PORT}`);
     });
 };
 
