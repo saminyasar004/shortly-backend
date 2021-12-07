@@ -34,7 +34,7 @@ https://shortly-samin.herokuapp.com/shorten?url=example.org
 {
   "result": {
       "shortenId": "kcven",
-      "shortenLink": "https://shortly-samin.herokuapp.com/kcven",
+      "shortenLink": "https://shortly-samin.herokuapp.com/redirect/kcven",
       "originalLink": "http://example.org"
   }
 }
