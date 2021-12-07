@@ -8,7 +8,7 @@
 // Dependencies
 const database = require("../../helpers/database");
 const utilities = require("../../helpers/utilities");
-require("dotenv").config();
+const config = require("../../helpers/config");
 
 // Module scaffolding
 const shortenHandler = {};
@@ -43,7 +43,7 @@ shortenHandler.shorten.get = (requestProps, callback) => {
                 if (!getExistingError && getExistingData.length) {
                     // return the existing data
                     const existingData = { ...getExistingData[0] };
-                    existingData.shortenLink = `${process.env.PROJECT_URL}/redirect/${existingData.shortenId}`;
+                    existingData.shortenLink = `${config.projectURL}/redirect/${existingData.shortenId}`;
                     delete existingData.id;
 
                     callback(200, {
@@ -65,7 +65,7 @@ shortenHandler.shorten.get = (requestProps, callback) => {
                                 (getCreatedError, getCreatedData) => {
                                     if (!getCreatedError && getCreatedData.length) {
                                         const createdData = { ...getCreatedData[0] };
-                                        createdData.shortenLink = `${process.env.PROJECT_URL}/redirect/${createdData.shortenId}`;
+                                        createdData.shortenLink = `${config.projectURL}/redirect/${createdData.shortenId}`;
                                         delete createdData.id;
 
                                         callback(200, {

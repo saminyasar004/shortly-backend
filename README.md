@@ -11,13 +11,13 @@ The API accect only GET method.
 -   Base route
 
 ```http
-http://localhost:3000
+https://shortly-samin.herokuapp.com
 ```
 
 -   Shorten a link
 
 ```http
-http://localhost:3000/shorten
+https://shortly-samin.herokuapp.com/shorten
 ```
 
 Create a short link for a given URL. Requires a `url` parameter
@@ -25,7 +25,7 @@ Create a short link for a given URL. Requires a `url` parameter
 ### Example
 
 ```http
-http://localhost:3000/shorten?url=example.org
+https://shortly-samin.herokuapp.com/shorten?url=example.org
 ```
 
 ### Response
@@ -34,7 +34,7 @@ http://localhost:3000/shorten?url=example.org
 {
   "result": {
       "shortenId": "KCveN",
-      "shortenLink": "http://localhost:3000/KCveN",
+      "shortenLink": "https://shortly-samin.herokuapp.com/KCveN",
       "originalLink": "http://example.org"
   }
 }

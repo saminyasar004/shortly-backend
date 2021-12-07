@@ -7,7 +7,7 @@
 
 // Dependencies
 const http = require("http");
-require("dotenv").config();
+const config = require("./config");
 
 const { handler: reqResHandler } = require("../handlers/reqResHandler");
 
@@ -15,7 +15,7 @@ const { handler: reqResHandler } = require("../handlers/reqResHandler");
 const server = {};
 
 // Set a Server port
-server.PORT = process.env.PORT || 5000;
+server.PORT = process.env.PORT || config.port;
 
 // Define the initializer function
 server.init = () => {

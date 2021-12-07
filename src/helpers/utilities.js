@@ -8,6 +8,7 @@
 // Dependencies
 const crypto = require("crypto");
 
+const config = require("./config");
 // Module scaffolding
 const utilities = {};
 
@@ -35,7 +36,7 @@ utilities.parseJSON = (str) => {
  */
 utilities.encrypt = (str) => {
     if (typeof str === "string" && str.trim().length > 0) {
-        return crypto.createHmac("sha256", process.env.SECRET_KEY).update(str).digest("hex");
+        return crypto.createHmac("sha256", config.secretKey).update(str).digest("hex");
     }
     return null;
 };

@@ -7,18 +7,18 @@
 
 // Dependencies
 const mysql = require("mysql");
-require("dotenv").config();
+const config = require("./config");
 
 // Module scaffolding
 const database = {};
 
 // Create a database connection
 database.connection = mysql.createConnection({
-    host: process.env.DB_HOST,
-    user: process.env.DB_USER,
-    password: process.env.DB_PASSWORD,
-    port: process.env.DB_PORT,
-    database: process.env.DB,
+    host: config.db.host,
+    user: config.db.user,
+    password: config.db.password,
+    port: config.db.port,
+    database: config.db.database,
 });
 
 /**
@@ -28,7 +28,7 @@ database.connection = mysql.createConnection({
  * @param {CallableFunction} callback - A callback function
  */
 database.createTable = (con, callback) => {
-    const sqlQuery = `CREATE TABLE IF NOT EXISTS ${process.env.DB_TABLE} (id INT(11) AUTO_INCREMENT PRIMARY KEY, shortenId VARCHAR(255) NOT NULL, originalLink VARCHAR(255) NOT NULL)`;
+    const sqlQuery = `CREATE TABLE IF NOT EXISTS ${config.db.tables.link} (id INT(11) AUTO_INCREMENT PRIMARY KEY, shortenId VARCHAR(255) NOT NULL, originalLink VARCHAR(255) NOT NULL)`;
     con.query(sqlQuery, (err) => {
         if (!err) {
             callback(null);
@@ -46,7 +46,7 @@ database.createTable = (con, callback) => {
  * @param {CallableFunction} callback - A callback function
  */
 database.getByOriginalLink = (con, link, callback) => {
-    const sqlQuery = `SELECT * FROM ${process.env.DB_TABLE} WHERE originalLink = '${link}'`;
+    const sqlQuery = `SELECT * FROM ${config.db.tables.link} WHERE originalLink = '${link}'`;
     con.query(sqlQuery, (err, result) => {
         if (!err && result) {
             callback(null, result);
@@ -65,7 +65,7 @@ database.getByOriginalLink = (con, link, callback) => {
  * @param {CallableFunction} callback - A callback function
  */
 database.getByShortenId = (con, shortenId, callback) => {
-    const sqlQuery = `SELECT * FROM ${process.env.DB_TABLE} WHERE shortenId = '${shortenId}'`;
+    const sqlQuery = `SELECT * FROM ${config.db.tables.link} WHERE shortenId = '${shortenId}'`;
     con.query(sqlQuery, (err, result) => {
         if (!err && result) {
             callback(null, result);
@@ -85,7 +85,7 @@ database.getByShortenId = (con, shortenId, callback) => {
  */
 database.insertLink = (con, values, callback) => {
     const { shortenId, originalLink } = values;
-    const sqlQuery = `INSERT INTO ${process.env.DB_TABLE} (shortenId, originalLink) VALUES ('${shortenId}', '${originalLink}')`;
+    const sqlQuery = `INSERT INTO ${config.db.tables.link} (shortenId, originalLink) VALUES ('${shortenId}', '${originalLink}')`;
     con.query(sqlQuery, (err) => {
         if (!err) {
             callback(null);
@@ -99,20 +99,20 @@ database.insertLink = (con, values, callback) => {
 // Connect the database
 database.connection.connect((err) => {
     if (!err) {
-        console.log(`Successfully connected with ${process.env.DB} database.`);
+        console.log(`Successfully connected with ${config.db.database} database.`);
         // create a table in the database if not exist
         database.createTable(database.connection, (createError) => {
             if (!createError) {
-                console.log(`Successfully created ${process.env.DB_TABLE} in the database.`);
+                console.log(`Successfully created ${config.db.tables.link} in the database.`);
             } else {
                 console.log(
-                    `Error occures while creating ${process.env.DB_TABLE} in the database.`
+                    `Error occures while creating ${config.db.tables.link} in the database.`
                 );
                 throw new Error(createError);
             }
         });
     } else {
-        console.log(`Error occures while connecting to ${process.env.DB} database.`);
+        console.log(`Error occures while connecting to ${config.db.database} database.`);
         throw new Error(err);
     }
 });
