@@ -39,3 +39,9 @@ https://shortly-samin.herokuapp.com/shorten?url=example.org
   }
 }
 ```
+
+[The frontend part of this project](https://github.com/saminyasar004/shortly-landing-page "Fronted part repository")
+
+[The Live preview of this project](https://shortlyy.vercel.app/ "Shortly Live preview")
+
+### Happy Coding 🚀

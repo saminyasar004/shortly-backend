@@ -13,13 +13,7 @@ const config = require("./config");
 const database = {};
 
 // Create a database connection
-database.connection = mysql.createConnection({
-    host: config.db.host,
-    user: config.db.user,
-    password: config.db.password,
-    port: config.db.port,
-    database: config.db.database,
-});
+database.connection = mysql.createConnection(config.db.url);
 
 /**
  * Create table in the database
