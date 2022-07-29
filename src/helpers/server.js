@@ -6,8 +6,10 @@
  */
 
 // Dependencies
+const path = require("path");
 const http = require("http");
 const config = require("./config");
+require("dotenv").config(path.join(__dirname, "../../.env"));
 
 const { handler: reqResHandler } = require("../handlers/reqResHandler");
 
